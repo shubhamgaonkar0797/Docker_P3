@@ -1,0 +1,276 @@
+========================================
+OpsMate Docker Deployment Report
+========================================
+
+Project Name:
+Containerizing and Deploying OpsMate Service Using Docker and AWS
+
+----------------------------------------
+1. Project Overview
+----------------------------------------
+
+OpsMate is a Node.js application containerized using Docker.
+
+The project demonstrates:
+- Docker image creation
+- Docker container management
+- Docker networking
+- Docker Compose
+- PostgreSQL database integration
+- AWS ECR
+- AWS ECS/Fargate deployment
+
+----------------------------------------
+2. Docker Environment
+----------------------------------------
+
+Operating System:
+Ubuntu 26.04 LTS
+
+Docker Version:
+Docker 29.1.3
+
+Docker Compose Version:
+Docker Compose v5.5.0
+
+AWS Region:
+ap-south-1
+
+----------------------------------------
+3. Dockerfile
+----------------------------------------
+
+The Dockerfile uses Node.js as the base image.
+
+Main Dockerfile instructions used:
+- FROM
+- WORKDIR
+- COPY
+- RUN
+- EXPOSE
+- CMD
+
+The application dependencies are installed using npm install.
+
+----------------------------------------
+4. Docker Image
+----------------------------------------
+
+Application image:
+
+opsmate:1.0
+
+The image was created using:
+
+docker build -t opsmate:1.0 .
+
+----------------------------------------
+5. Docker Container
+----------------------------------------
+
+Container name:
+
+opsmate-container
+
+The container was started using:
+
+docker run -d \
+  --name opsmate-container \
+  -p 8080:8080 \
+  opsmate:1.0
+
+Port mapping:
+
+EC2 Host Port 8080
+        |
+        v
+Container Port 8080
+
+----------------------------------------
+6. Application Testing
+----------------------------------------
+
+Health endpoint:
+
+http://localhost:8080/health
+
+Expected response:
+
+{"status":"healthy","service":"OpsMate"}
+
+The application was successfully tested from the EC2 instance.
+
+----------------------------------------
+7. Docker Compose
+----------------------------------------
+
+Docker Compose was used to deploy multiple services.
+
+Services:
+
+1. OpsMate application
+2. PostgreSQL database
+
+Application container:
+
+opsmate-app
+
+Database container:
+
+opsmate-db
+
+The application communicates with PostgreSQL using the Docker
+network.
+
+Database host:
+
+database
+
+Database port:
+
+5432
+
+----------------------------------------
+8. Persistent Storage
+----------------------------------------
+
+PostgreSQL data is stored using a Docker named volume:
+
+postgres-data
+
+This allows database data to persist when the PostgreSQL
+container is recreated.
+
+----------------------------------------
+9. Database Connectivity Test
+----------------------------------------
+
+Endpoint:
+
+http://localhost:8080/db-test
+
+Successful response:
+
+OpsMate successfully connected to PostgreSQL
+
+This confirms communication between the application container
+and PostgreSQL database container.
+
+----------------------------------------
+10. Docker Scripts
+----------------------------------------
+
+The project contains the following scripts:
+
+scripts/install-docker.sh
+scripts/build-image.sh
+scripts/run-container.sh
+scripts/cleanup.sh
+
+Purpose:
+
+install-docker.sh
+- Installs Docker
+- Starts Docker service
+- Enables Docker at boot
+
+build-image.sh
+- Builds the OpsMate Docker image
+
+run-container.sh
+- Removes an old container
+- Starts the OpsMate container
+- Maps port 8080
+- Tests the health endpoint
+
+cleanup.sh
+- Stops the OpsMate container
+- Removes the container
+
+----------------------------------------
+11. AWS ECR
+----------------------------------------
+
+ECR repository:
+
+opsmate
+
+AWS Region:
+
+ap-south-1
+
+Repository URI:
+
+048674617574.dkr.ecr.ap-south-1.amazonaws.com/opsmate
+
+The Docker image is intended to be pushed to Amazon ECR
+for ECS/Fargate deployment.
+
+----------------------------------------
+12. AWS ECS
+----------------------------------------
+
+ECS cluster created:
+
+opsmate-fargate-cluster
+
+Launch type:
+
+AWS Fargate
+
+The ECS cluster is ACTIVE.
+
+----------------------------------------
+13. Project Architecture
+----------------------------------------
+
+User
+ |
+ v
+AWS / EC2
+ |
+ v
+Docker
+ |
+ +----------------------+
+ |                      |
+ v                      v
+OpsMate App          PostgreSQL
+Container            Container
+ |
+ +------ Docker Network ------+
+ |
+ v
+Persistent PostgreSQL Volume
+
+For AWS deployment:
+
+OpsMate Docker Image
+        |
+        v
+      ECR
+        |
+        v
+   ECS Fargate
+        |
+        v
+OpsMate Application
+
+
+----------------------------------------
+14. Conclusion
+----------------------------------------
+
+The OpsMate application was successfully containerized using
+Docker.
+
+Docker images and containers were created and managed using
+Docker commands and shell scripts.
+
+Docker Compose was used to run the application and PostgreSQL
+database as multiple containers.
+
+The application successfully connected to PostgreSQL through
+the Docker network.
+
+AWS ECR and ECS/Fargate were prepared for cloud deployment.

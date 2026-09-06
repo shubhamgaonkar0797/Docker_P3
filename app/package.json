@@ -1,0 +1,13 @@
+{
+  "name": "opsmate",
+  "version": "1.0.0",
+  "description": "OpsMate Docker Fundamentals Project",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}

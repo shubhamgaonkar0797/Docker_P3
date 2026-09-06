@@ -1,0 +1,28 @@
+                    USER
+                      |
+                      v
+              OpsMate Application
+                 Container
+                      |
+             Docker Network
+                      |
+                      v
+             PostgreSQL Container
+                      |
+                      v
+              postgres-data
+                 Volume
+
+
+AWS CLOUD DEPLOYMENT
+
+      Docker Image
+           |
+           v
+          ECR
+           |
+           v
+      ECS Fargate
+           |
+           v
+   OpsMate Application
