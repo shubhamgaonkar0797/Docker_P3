@@ -113,7 +113,7 @@ OpsMate-Docker-Project/
 ---
 
 ### Dockerfile
-
+```
 The Dockerfile creates the OpsMate application image.
 
 Main instructions used:
@@ -124,17 +124,17 @@ COPY
 RUN
 EXPOSE
 CMD
-
+```
 ---
 ### Build the image:
-
+```
 docker build -t opsmate:1.0 .
 
 Check the image: docker images
-
+```
 ---
 ### Run OpsMate Container
-
+```
 Run the application:
 docker run -d \
   --name opsmate-container \
@@ -146,15 +146,16 @@ docker ps
 
 Check application logs:
 docker logs opsmate-container
-
+```
 ---
 ### Application Endpoints
+```
 Home
 http://localhost:8080/
 
 Health Check
 http://localhost:8080/health
-
+```
 ---
 Expected response:
 
@@ -177,6 +178,7 @@ OpsMate Application
 PostgreSQL Database
 ```
 ---
+```
 Start the application:
 docker compose up -d
 
@@ -195,10 +197,10 @@ curl http://localhost:8080/db-test
 Stop the Compose stack:
 docker compose down
 Database
-
+```
 ---
 ### Shell Scripts
-
+```
 install-docker.sh
 
 Installs Docker and starts the Docker service.
@@ -215,10 +217,10 @@ cleanup.sh
 
 Stops and removes the application container.
 ./scripts/cleanup.sh
-
+```
 ---
 ### AWS ECR
-
+```
 AWS region:
 ap-south-1
 
@@ -229,7 +231,7 @@ ECR is used to store the Docker image before deploying it to ECS.
 
 Image:
 opsmate:1.0
-
+```
 ---
 ### AWS ECS / Fargate
 
@@ -249,7 +251,7 @@ OpsMate Docker Container
 ```
 ---
 ### Verification
-
+```
 Important Docker commands used during the project:
 
 docker --version
@@ -270,10 +272,10 @@ Application testing:
 
 curl http://localhost:8080/health
 curl http://localhost:8080/db-test
-
+```
 ---
 ### Learning Outcomes
-
+```
 After completing this project, the following concepts were practiced:
 Docker architecture
 Images and containers
@@ -290,3 +292,4 @@ Amazon ECR
 Amazon ECS
 AWS Fargate
 Basic DevOps deployment workflow
+```
